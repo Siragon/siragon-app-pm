@@ -1,0 +1,17 @@
+{
+  "name": "project-manager",
+  "description": "Síragon Project Manager.",
+  "version": "0.1",
+  "main": "index.html",
+  "window": {
+    "always-on-top": true,
+    "icon": "img/user.png", 
+    "show": false,
+    "position": "center",
+    "toolbar": false,
+     "width": 400,
+    "height": 550,
+	"frame": true,
+	"as_desktop": true
+  }
+}
