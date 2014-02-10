@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Síragon Project Manager</title>
+ 		<link rel="stylesheet/less" href="less/bootstrap.less" />
+
+		<script>
+		  less = {
+			env: "development",
+			logLevel: 2,
+			async: false,
+			fileAsync: false,
+			poll: 1000,
+			functions: {},
+			dumpLineNumbers: "comments",
+			relativeUrls: false,
+			rootpath: ":/a.com/"
+		  };
+		</script>
+		<script src="js/less-1.6.2.js"></script>
+<style>* {
+  box-sizing: border-box;
+  margin: 0;
+ -webkit-user-select: none;
+        cursor: default;
+}
+body {
+  background: linear-gradient(45deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1), linear-gradient(125deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1);
+  min-height: 100vh;
+}
+</style>
+<script >
+var gui = require('nw.gui');
+var win = gui.Window.get();
+if(localStorage.org==''){
+var popWindow = gui.Window.open('login.html',
+                                {width: 400, height: 550, toolbar: false, show: false, icon: "img/user.png", position: "center"});
+    popWindow.on('close', function() {
+        //var image = popWindow.window.document.getElementById('image');
+       this.close(true);
+        if(localStorage.org==''){
+            //win.close(true);
+            gui.App.quit();
+        }else{
+            run();
+        }
+    });
+}else{
+    window.onload = function(){
+        run();
+    }
+}
+    
+    function run(){
+    console.log(localStorage.token);
+    console.log(localStorage.org);
+        $(document).keypress(function(e){
+            switch(e.which)
+            {
+                // user presses the "F5"
+                case 116: win.reloadIgnoringCache(); break;
+                // user presses the "F1"   
+                case 112: win.showDevTools(); break;
+            }
+        });
+        win.show();
+    }
+
+
+</script>
+</head>
+  <body>
+    <h1>Hello, world!</h1>
+
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/bootstrap-3.1.0.js"></script>
+</body>
+</html>
