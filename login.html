@@ -313,6 +313,11 @@ vertical-align: middle;
 /*        -webkit-font-variant-ligatures:common-ligatures;*/
         text-transform:capitalize;
     }
+    
+    h1, h2, h3, h4, h5{
+/*        box-shadow: 0 0 25px 5px rgba(255,255,255,0.8), 0px 0px 25px rgba(255,255,255,0.8) inset;*/
+        text-shadow: 0 0 30px #fff;
+    }
         
 </style></head><body>
 <svg
@@ -651,6 +656,7 @@ var btn = $('#login-btn');
             if (this.status >= 200 && this.status < 300 || this.status === 304) {
                 var out = JSON.parse(this.responseText);
                 localStorage.token = out.token;
+                localStorage.user = $( "#username" ).val();
                 $.ajax({
                     url: "https://api.github.com/users/" + $( "#username" ).val() + "/orgs",
                     dataType: "json",

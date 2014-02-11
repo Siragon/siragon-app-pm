@@ -21,16 +21,131 @@
 		  };
 		</script>
 		<script src="js/less-1.6.2.js"></script>
-<style>* {
+<style>
+    
+    
+    * {
+        
   box-sizing: border-box;
   margin: 0;
+        color: #fff !important; 
+        
  -webkit-user-select: none;
         cursor: default;
+/*    text-shadow: 0 0 30px #fff;*/
 }
 body {
-  background: linear-gradient(45deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1), linear-gradient(125deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1);
+    
+/*  background: linear-gradient(45deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1), linear-gradient(125deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1);*/
+    background: url('http://elementaryos.org/img/grid-pattern.png') repeat scroll -4px -1px #2980b9;
   min-height: 100vh;
+/*    background-size: contain;*/
+/*    background-attachment: fixed;*/
 }
+    
+    .list-group {
+margin-bottom: 0px;
+
+}
+    .list-group-item{
+        background: transparent;
+        border: 0;
+        padding: 10px 20px;
+    }
+    
+.list-group-item:hover{
+        background: rgba(255,255,255,0.1) !important;
+    }
+
+.list-group-item:hover .timeline{
+        background: rgba(255,255,255,1);
+        color: #2980b9 !important;
+    }
+    
+    
+    .list-group-item:nth-child(odd){
+        margin-right: 50%;
+        text-align:right;
+/*        border-right: 2px solid rgba(255,255,255,0.7);*/
+    }
+    .list-group-item:nth-child(even){
+        margin-left: 50%;
+        text-align:left;
+/*         box-shadow: -2px 0 0 rgba(255,255,255,0.7);*/
+    }
+    
+    .timeline{
+        position: absolute;
+        margin-top: 0px;
+         border: 2px solid rgba(255,255,255,0.7);
+        padding: 4px;
+        border-radius: 50%;
+        
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        
+    }
+    .list-group-item:nth-child(even) .timeline{
+        margin-left: -35px;
+    }
+    .list-group-item:nth-child(odd) .timeline{
+        margin-left: 5px;
+    }
+          .list-group-item:nth-child(even) #borderLeft  {
+         border-left: 2px solid rgba(255,255,255,0.7);
+         position: absolute;
+         top: 34px;
+         bottom: -10px;
+         left: -2px;
+         }
+          .list-group-item:nth-child(odd) #borderLeft  {
+         border-left: 2px solid rgba(255,255,255,0.7);
+         position: absolute;
+         top: 34px;
+         bottom: -10px;
+         right: 0px;
+         }
+    
+@media (max-width: 600px) {
+    .list-group-item:nth-child(odd){
+        margin: 0px 0px 0px 20px;
+        text-align:left;
+
+        
+    }
+    .list-group-item:nth-child(even){
+        margin: 0px 0px 0px 20px;
+         text-align:left;
+
+
+
+    }
+    
+
+    .list-group-item:nth-child(odd) .timeline{
+        margin-left: -35px;
+    }
+
+          .list-group-item:nth-child(odd) #borderLeft  {
+         border-left: 2px solid rgba(255,255,255,0.7);
+         position: absolute;
+         top: 34px;
+         bottom: -10px;
+         left: -2px;
+         }
+}
+
+    ::-webkit-scrollbar-thumb { 
+        background: rgba(255,255,255,1);   
+    }
+    ::-webkit-scrollbar-track { 
+        background: #ddd;
+    }
+    ::-webkit-scrollbar { 
+        width: 8px;
+        background: #ddd;
+    } 
 </style>
 <script >
 var gui = require('nw.gui');
@@ -73,6 +188,7 @@ var win = gui.Window.get();
             }
         });
         win.show();
+        eventsOrg();
     }
 
 function issues(errorMsg, url, lineNumber, BuildLabEx) {
@@ -84,10 +200,17 @@ function issues(errorMsg, url, lineNumber, BuildLabEx) {
     };
     _request("POST", "/repos/siragon/aosu/issues", data, null);
 }
+    
+    //GET /users/:user/events/orgs/:org
+function eventsOrg() {
+    _request("GET", "/users/"+localStorage.user+"/events/orgs/"+localStorage.org, null, null, function() {
+	   console.log(this);
+    });
+}
 
     
     
-function _request(method, path, data, raw) {
+function _request(method, path, data, raw, callback) {
     var API_URL = 'https://api.github.com';
 
     function getURL() {
@@ -102,15 +225,22 @@ function _request(method, path, data, raw) {
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
             if (this.status >= 200 && this.status < 300 || this.status === 304) {
-                console.log(null, raw ? this.responseText : this.responseText ? JSON.parse(this.responseText) : true);
-                console.log(this.responseText);
+                //console.log(null, raw ? this.responseText : this.responseText ? JSON.parse(this.responseText) : true);
+                //console.log(this.responseText);
+                //return JSON.parse(this.responseText);
+                callback.call(JSON.parse(this.responseText));
             } else {
-                console.log({request: this, error: this.status});
-                console.log(this.responseText);
+                //console.log({request: this, error: this.status});
+                //console.log(this.responseText);
                 var out = JSON.parse(this.responseText);
                 if(out.message == "Bad credentials"){
                     login();
                 }
+                if(out.message == "Not Found"){
+                    alert("Not Found");
+                }
+                callback.call(JSON.parse(this.responseText));
+                //return JSON.parse(this.responseText);
             }
         }
     };
@@ -119,10 +249,44 @@ function _request(method, path, data, raw) {
     xhr.setRequestHeader('Authorization', 'Token ' + localStorage.token);
     data ? xhr.send(JSON.stringify(data)) : xhr.send();
 }
+
+
 </script>
 </head>
   <body>
-    <h1>Hello, world!</h1>
+
+
+<div class="list-group">
+      <a href="#" class="list-group-item">
+         <span class="timeline octicon octicon-repo"></span>
+          <div id="borderLeft"></div>
+        <h4 class="list-group-item-heading">seattle-app-sop</h4>
+        <p class="list-group-item-text">Standard Operating Procedure for the device seattle. 
+App for deploy the customization of system android.</p><hr style="margin: 5px">
+          <p class="list-group-item-text"><span class="octicon octicon-calendar"></span>  12 July 2014</p>
+          <p><span class="octicon octicon-person"></span> alexsalas</p>
+      </a>
+      <a href="#" class="list-group-item">
+          <span class="timeline octicon octicon-git-branch"></span>
+          <div id="borderLeft"></div>
+        <h4 class="list-group-item-heading">seattle-app-sop</h4>
+        <p class="list-group-item-text">Standard Operating Procedure for the device seattle. 
+App for deploy the customization of system android.</p><hr style="margin: 5px">
+          <p class="list-group-item-text"><span class="octicon octicon-calendar"></span>  12 July 2014</p>
+          <p><span class="octicon octicon-person"></span> alexsalas</p>
+          
+      </a>
+      <a href="#" class="list-group-item">
+          <span class="timeline octicon octicon-person-add"></span>
+          <div id="borderLeft"></div>
+        <h4 class="list-group-item-heading">seattle-app-sop</h4>
+        <p class="list-group-item-text">Standard Operating Procedure for the device seattle. 
+App for deploy the customization of system android.</p><hr style="margin: 5px">
+          <p class="list-group-item-text"><span class="octicon octicon-calendar"></span>  12 July 2014</p>
+          <p><span class="octicon octicon-person"></span> alexsalas</p>
+      </a>
+    </div>
+
 
 		<script src="js/jquery-2.1.0.js"></script>
 		<script src="js/bootstrap-3.1.0.js"></script>
