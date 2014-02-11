@@ -205,6 +205,78 @@ function issues(errorMsg, url, lineNumber, BuildLabEx) {
 function eventsOrg() {
     _request("GET", "/users/"+localStorage.user+"/events/orgs/"+localStorage.org, null, null, function() {
 	   console.log(this);
+//	var s = "";
+//                $("#" + id).empty();
+//                $.each(events, function (e, item) {
+//					console.log(e);
+//					console.log(item);
+//					dt= new Date(item.created_at);
+//					switch (item.type) {
+//					  case 'CreateEvent':
+//						s += '<li>';
+//						s += '	<ul id="messages">';
+//						s += '		<li>';
+//						s += '			<div class="infos flip-container" ontouchstart="this.classList.toggle(\'hover\');">';
+//						s += '					<div class="flipper">';
+//						s += '						<div class="front">';
+//						s += '						<img src="'+item.actor.avatar_url+'" alt="" title="'+item.actor.gravatar+'" />';
+//						s += '						</div>';
+//						s += '						<div class="back">';
+//						s += '						<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>' + dt.toLocaleDateString() + '</span> <span>' + dt.getHours() +':'+ dt.getMinutes()  + '</span></time>';
+//						s += '						</div>';
+//						s += '					</div>';
+//						s += '				<a href="http://twitter.com/webodream" class="sprite twitter">@webodream</a>';
+//						s += '				<a href="http://www.facebook.com/groups/115089745169149" class="sprite facebook">depot.webdesigner</a>';
+//						s += '				<a href="https://github.com/'+item.actor.login+'" class="sprite github">'+item.actor.login+'</a>';
+//						s += '			</div>';
+//						s += '		</li>';
+//						s += '	</ul>';
+//						s += '	<div class="cbp_tmicon cbp_tmicon-phone"></div>';
+//						s += '	<div class="cbp_tmlabel">';
+//						s += '		<h2>'+ item.type +'</h2>';
+//						s += '		<p>'+ item.payload.description +'</p>';
+//						s += '	</div>';
+//						s += '</li>';
+//						break;
+//					  default:
+//						break;
+//					}
+//
+//					/*
+//					[
+//					  {
+//						"type": "Event",
+//						"public": true,
+//						"payload": {
+//						},
+//						"repo": {
+//						  "id": 3,
+//						  "name": "octocat/Hello-World",
+//						  "url": "https://api.github.com/repos/octocat/Hello-World"
+//						},
+//						"actor": {
+//						  "id": 1,
+//						  "login": "octocat",
+//						  "gravatar_id": "somehexcode",
+//						  "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+//						  "url": "https://api.github.com/users/octocat"
+//						},
+//						"org": {
+//						  "id": 1,
+//						  "login": "github",
+//						  "gravatar_id": "somehexcode",
+//						  "url": "https://api.github.com/orgs/github",
+//						  "avatar_url": "https://github.com/images/error/octocat_happy.gif"
+//						},
+//						"created_at": "2011-09-06T17:26:27Z",
+//						"id": "12345"
+//					  }
+//					]
+//					
+//					*/
+//                });
+//                $("#" + id).append('<ul class="grid effect-2 cbp_tmtimeline" id="grid">' + s + "</ul>");
+            
     });
 }
 
