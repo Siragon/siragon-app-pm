@@ -34,23 +34,63 @@
         cursor: default;
 /*    text-shadow: 0 0 30px #fff;*/
 }
-body {
     
+html {
+    background-image:url('img/Radiance - iPad.jpg');
 /*  background: linear-gradient(45deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1), linear-gradient(125deg, #539fa2 0%, #72b1a4 33%, #c4dbb4 67%, #abccb1);*/
-    background: url('http://elementaryos.org/img/grid-pattern.png') repeat scroll -4px -1px #2980b9;
+/*    background: url('http://elementaryos.org/img/grid-pattern.png') repeat scroll -4px -1px #2980b9;*/
+/*
+    background-color: transparent;
+    background-image: url('img/Android.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: auto 100%;
+*/
+/*      background: linear-gradient(130deg, #543958 0%,#a06060 25%,#bea27b 50%,#9ca898 75%,#506d8d 100%) no-repeat center center fixed; */
+  background-size: cover;
+    background-attachment: fixed;
   min-height: 100vh;
 /*    background-size: contain;*/
 /*    background-attachment: fixed;*/
 }
     
-    .list-group {
-margin-bottom: 0px;
+    
 
+/*
+body:before{content:''; left:0; top:0; bottom:0; right:0; width:100%; height:100%; position:fixed; background-size: cover;   background-image:url('img/Springing.jpg');z-index:-10;
+    background-attachment: fixed;
+}
+*/
+
+        body{
+    background: rgba(0,0,0,.1);
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 100%;
+         height:100%;
+           
+     
+    }
+
+
+    .list-group {
+margin-bottom: 10px;
+min-height: 100vh;
+        
 }
     .list-group-item{
         background: transparent;
         border: 0;
         padding: 10px 20px;
+        
+        font-family: "Fira Sans Light";
+        
+    }
+    h4{
+        
+            
+        font-family: "Fira Sans Medium";
     }
     
 .list-group-item:hover{
@@ -59,7 +99,7 @@ margin-bottom: 0px;
 
 .list-group-item:hover .timeline{
         background: rgba(255,255,255,1);
-        color: #2980b9 !important;
+/*        color: #2980b9 !important;*/
     }
     
     
@@ -77,8 +117,8 @@ margin-bottom: 0px;
     .timeline{
         position: absolute;
         margin-top: 0px;
-         border: 2px solid rgba(255,255,255,0.7);
-        padding: 4px;
+         border: 1px solid rgba(255,255,255,0.7);
+        padding: 5px;
         border-radius: 50%;
         
         width: 28px;
@@ -93,16 +133,16 @@ margin-bottom: 0px;
         margin-left: 5px;
     }
           .list-group-item:nth-child(even) #borderLeft  {
-         border-left: 2px solid rgba(255,255,255,0.7);
+         border-left: 1px solid rgba(255,255,255,0.7);
          position: absolute;
-         top: 34px;
+         top: 38px;
          bottom: -10px;
-         left: -2px;
+         left: -1px;
          }
           .list-group-item:nth-child(odd) #borderLeft  {
-         border-left: 2px solid rgba(255,255,255,0.7);
+         border-left: 1px solid rgba(255,255,255,0.7);
          position: absolute;
-         top: 34px;
+         top: 38px;
          bottom: -10px;
          right: 0px;
          }
@@ -128,11 +168,11 @@ margin-bottom: 0px;
     }
 
           .list-group-item:nth-child(odd) #borderLeft  {
-         border-left: 2px solid rgba(255,255,255,0.7);
+         border-left: 1px solid rgba(255,255,255,0.7);
          position: absolute;
-         top: 34px;
+         top: 38px;
          bottom: -10px;
-         left: -2px;
+         left: -1px;
          }
 }
 
@@ -146,18 +186,98 @@ margin-bottom: 0px;
         width: 8px;
         background: #ddd;
     } 
+    
+/* Fonts */
+h1 { /* Main header */
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+h2 { /* Subheader, Dialog title */
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1.9rem;
+  font-weight: normal;
+  line-height: 2.5rem;
+}
+
+p.large { /* Dialog body */
+  font-size: 2.3rem;
+  font-weight: 300;
+  line-height: 3rem;
+}
+
+p.alt { /* Body medium, Buttons */
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 2.2rem;
+}
+
+p.small { /* Status bar */
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+p.mini { /* Fine print */
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+}
+
+p.micro { /* App icon label */
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+}
+
+ul, ol, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.9rem;
+  font-weight: normal;
+  line-height: 2.5rem;
+}
 </style>
 <script >
+var _ = require('underscore');
 var gui = require('nw.gui');
 var win = gui.Window.get();
-    
+var next = '';    
     if(localStorage.org==''){
         login();
     }else{
         window.onload = function(){
             run();
+           averageColor('img/Radiance - iPad.jpg', function(rgb){
+               console.log(rgb);
+//               $( '.list-group-item' ).hover(
+//                    function() {
+//                        console.log(rgb);
+//                    $( '.timeline' ).css( "color", rgb + ' !important' );
+//                        
+//                    }, function() {
+//                    $( '.timeline' ).css( "color", 'white !important' );
+//                        console.log('white !important' );
+//                    }
+//                );
+               var css='.list-group-item:hover .timeline{ color: '+rgb+' !important}';
+                style=document.createElement('style');
+                style.appendChild(document.createTextNode(css));
+               document.getElementsByTagName('head')[0].appendChild(style);
+           });
         }
     }
+    
+window.onscroll = function (event) {
+if (($(window).innerHeight() + $(window).scrollTop()) >= $("body").height()) {
+ if(typeof next !== 'undefined' && next != null && next != ''){
+   eventsOrg(next);
+ };
+    
+}
+}
     
     function login(){
         win.hide();
@@ -188,7 +308,7 @@ var win = gui.Window.get();
             }
         });
         win.show();
-        eventsOrg();
+        eventsOrg("https://api.github.com/users/"+localStorage.user+"/events/orgs/"+localStorage.org);
     }
 
 function issues(errorMsg, url, lineNumber, BuildLabEx) {
@@ -201,48 +321,132 @@ function issues(errorMsg, url, lineNumber, BuildLabEx) {
     _request("POST", "/repos/siragon/aosu/issues", data, null);
 }
     
+
+
+    function averageColor(img, callback) {
+              var imageObj = new Image();
+
+
+      imageObj.src = img;
+        imageObj.onload = function() {
+        var blockSize = 5, // only sample every 5 pixels
+            defaultRGB = {r: 0, g: 0, b: 0}, // for non-supporting environments
+            canvas = document.createElement('canvas'),
+            context = canvas.getContext && canvas.getContext('2d'),
+            data, width, height,
+            i = -4,
+            length,
+            rgb = {r: 0, g: 0, b: 0},
+            count = 0;
+
+        if (!context) {
+            return defaultRGB;
+        }
+
+        height = canvas.height = imageObj.naturalHeight || imageObj.offsetHeight || imageObj.height;
+        width = canvas.width = imageObj.naturalWidth || imageObj.offsetWidth || imageObj.width;
+      
+        
+        context.drawImage(imageObj, 0, 0);
+     
+        
+
+        try {
+            data = context.getImageData(0, 0, width, height);
+        } catch (e) {
+            // security error, the image was served from a different domain
+            return defaultRGB;
+        }
+
+        length = data.data.length;
+
+        while ((i += blockSize * 4) < length) {
+            count += 1;
+            rgb.r += data.data[i];
+            rgb.g += data.data[i + 1];
+            rgb.b += data.data[i + 2];
+        }
+        
+        // ~~ used to floor values
+        rgb.r = ~~(rgb.r / count);
+        rgb.g = ~~(rgb.g / count);
+        rgb.b = ~~(rgb.b / count);
+
+        callback('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
+             };
+    }
+
+
+
+
+    
     //GET /users/:user/events/orgs/:org
-function eventsOrg() {
-    _request("GET", "/users/"+localStorage.user+"/events/orgs/"+localStorage.org, null, null, function() {
-	   console.log(this);
-//	var s = "";
-//                $("#" + id).empty();
-//                $.each(events, function (e, item) {
-//					console.log(e);
-//					console.log(item);
-//					dt= new Date(item.created_at);
-//					switch (item.type) {
-//					  case 'CreateEvent':
-//						s += '<li>';
-//						s += '	<ul id="messages">';
-//						s += '		<li>';
-//						s += '			<div class="infos flip-container" ontouchstart="this.classList.toggle(\'hover\');">';
-//						s += '					<div class="flipper">';
-//						s += '						<div class="front">';
-//						s += '						<img src="'+item.actor.avatar_url+'" alt="" title="'+item.actor.gravatar+'" />';
-//						s += '						</div>';
-//						s += '						<div class="back">';
-//						s += '						<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>' + dt.toLocaleDateString() + '</span> <span>' + dt.getHours() +':'+ dt.getMinutes()  + '</span></time>';
-//						s += '						</div>';
-//						s += '					</div>';
-//						s += '				<a href="http://twitter.com/webodream" class="sprite twitter">@webodream</a>';
-//						s += '				<a href="http://www.facebook.com/groups/115089745169149" class="sprite facebook">depot.webdesigner</a>';
-//						s += '				<a href="https://github.com/'+item.actor.login+'" class="sprite github">'+item.actor.login+'</a>';
-//						s += '			</div>';
-//						s += '		</li>';
-//						s += '	</ul>';
-//						s += '	<div class="cbp_tmicon cbp_tmicon-phone"></div>';
-//						s += '	<div class="cbp_tmlabel">';
-//						s += '		<h2>'+ item.type +'</h2>';
-//						s += '		<p>'+ item.payload.description +'</p>';
-//						s += '	</div>';
-//						s += '</li>';
-//						break;
-//					  default:
-//						break;
-//					}
-//
-//					/*
+    
+function eventsOrg(path) {
+    
+    _request("GET", path, null, null, function(events, next) {
+	   console.log("next: " + next);
+	var s = "";
+    var monthname=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
+    //$("#timeline").empty();
+    $.each(events, function (e, item) {
+        //console.log(e);
+        dt= new Date(item.created_at);
+        switch (item.type) {
+          case 'TeamAddEvent':
+                console.log(item);
+              s += '<a href="#" class="list-group-item">';
+              s += '   <span class="timeline octicon octicon-person-add"></span>';
+              s += '    <div id="borderLeft"></div>';
+                if(item.payload.user){
+                    s += '  <h4 class="list-group-item-heading">New user: '+ item.payload.user.login+'</h4>';
+                    s += '  <p class="list-group-item-text">Added the user '+ item.payload.user.login +' to the team '+ item.payload.team.name +'</p><hr style="margin: 5px">';
+                }
+                if(item.payload.repository){
+                    s += '  <h4 class="list-group-item-heading">New Team: '+ item.payload.team.name +'</h4>';
+                    s += '  <p class="list-group-item-text">Added the team '+ item.payload.team.name +' to the repo '+ item.payload.repository.name +'</p><hr style="margin: 5px">';
+                }
+              s += '    <p class="list-group-item-text">  '+ dt.getDate() +' '+ monthname[dt.getMonth()] +' '+ dt.getFullYear() +'</p>';
+              s += '    <p><span class="octicon octicon-person"></span> '+ item.actor.login +'</p>';
+              s += '</a>';
+            break;
+          case 'CreateEvent':
+              s += '<a href="#" class="list-group-item">';
+              s += '   <span class="timeline octicon octicon-repo"></span>';
+              s += '    <div id="borderLeft"></div>';
+              s += '  <h4 class="list-group-item-heading">seattle-app-sop</h4>';
+              s += '  <p class="list-group-item-text">'+ item.payload.description +'</p><hr style="margin: 5px">';
+              s += '    <p class="list-group-item-text">  '+ dt.getDate() +' '+ monthname[dt.getMonth()] +' '+ dt.getFullYear() +'</p>';
+              s += '    <p><span class="octicon octicon-person"></span> '+ item.actor.login +'</p>';
+              s += '</a>';
+            break;
+          case 'IssuesEvent':
+              s += '<a href="'+item.payload.issue.html_url+'" class="list-group-item">';
+                console.log(item.payload.issue.state);
+                 switch (item.payload.issue.state) {
+                     case 'open':
+                      s += '   <span class="timeline octicon octicon-issue-opened"></span>';
+                     break;
+                     case 'closed':
+                      s += '   <span class="timeline octicon octicon-issue-closed"></span>';
+                     break;
+                     case 'reopened':
+                      s += '   <span class="timeline octicon octicon-issue-reopened"></span>';
+                     break;
+                 }
+              s += '    <div id="borderLeft"></div>';
+              s += '  <h4 class="list-group-item-heading">Issue on: '+item.repo.name.split(localStorage.org+'\/')[1] +'</h4>';
+              s += '  <p class="list-group-item-text">'+ item.payload.issue.title +'</p><hr style="margin: 5px">';
+              s += '    <p class="list-group-item-text">  '+ dt.getDate() +' '+ monthname[dt.getMonth()] +' '+ dt.getFullYear() +'</p>';
+              s += '    <p><span class="octicon octicon-person"></span> '+ item.actor.login +'</p>';
+              s += '</a>';
+            break;
+          default:
+            break;
+        }
+    });
+    $("#timeline").append(s);
+
 //					[
 //					  {
 //						"type": "Event",
@@ -273,21 +477,17 @@ function eventsOrg() {
 //					  }
 //					]
 //					
-//					*/
-//                });
-//                $("#" + id).append('<ul class="grid effect-2 cbp_tmtimeline" id="grid">' + s + "</ul>");
+
             
     });
 }
 
     
     
-function _request(method, path, data, raw, callback) {
-    var API_URL = 'https://api.github.com';
-
+function _request(method, url, data, raw, callback) {
     function getURL() {
-        var url = API_URL + path;
-        return url + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
+        console.log(url);
+        return url;// + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
     }
     var xhr = new XMLHttpRequest();
     if (!raw) {
@@ -300,7 +500,20 @@ function _request(method, path, data, raw, callback) {
                 //console.log(null, raw ? this.responseText : this.responseText ? JSON.parse(this.responseText) : true);
                 //console.log(this.responseText);
                 //return JSON.parse(this.responseText);
-                callback.call(JSON.parse(this.responseText));
+                  var links = (xhr.getResponseHeader('link') || '').split(/\s*,\s*/g);
+                  next = _.find(links, function(link) { return /rel="next"/.test(link); });
+
+                  if (next) {
+                    next = (/<(.*)>/.exec(next) || [])[1];
+                  }
+
+                  if (!next) {
+                    //cb(err, results);
+                  } else {
+                    path = next;
+                  }
+                //callback.call();
+                callback(JSON.parse(this.responseText), next);
             } else {
                 //console.log({request: this, error: this.status});
                 //console.log(this.responseText);
@@ -328,7 +541,8 @@ function _request(method, path, data, raw, callback) {
   <body>
 
 
-<div class="list-group">
+<div id="timeline" class="list-group">
+<!--
       <a href="#" class="list-group-item">
          <span class="timeline octicon octicon-repo"></span>
           <div id="borderLeft"></div>
@@ -357,6 +571,7 @@ App for deploy the customization of system android.</p><hr style="margin: 5px">
           <p class="list-group-item-text"><span class="octicon octicon-calendar"></span>  12 July 2014</p>
           <p><span class="octicon octicon-person"></span> alexsalas</p>
       </a>
+-->
     </div>
 
 
