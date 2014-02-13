@@ -8,7 +8,7 @@
     "icon": "img/user.png", 
     "show": false,
     "position": "center",
-    "toolbar": true,
+    "toolbar": false,
      "width": 900,
     "height": 650,
 	"frame": true,
